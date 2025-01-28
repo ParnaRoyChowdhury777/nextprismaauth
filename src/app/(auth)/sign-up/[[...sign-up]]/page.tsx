@@ -56,7 +56,7 @@ function SignUp() {
         firstName: name.split(" ")[0],
         lastName: name.split(" ")[1],
       });
-    } catch (error: any) {
+    } catch (error: ) {
       console.error(JSON.stringify(error, null, 2));
 
       switch (error.errors[0]?.code) {
