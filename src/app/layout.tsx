@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "@/components/shared/Navbar";
+import Loader from "@/components/shared/Loader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,26 +34,24 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
         >
-          {/* <ClerkLoading>
-            <div className="flex items-center justify-center h-screen text-2xl font-medium">
-              LOADING...
-            </div>
-          </ClerkLoading> */}
-          {/* <ClerkLoaded> */}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <Navbar />
-          {children}
-          {/* </ClerkLoaded> */}
+          <ClerkLoading>
+            <Loader />
+          </ClerkLoading>
+          <ClerkLoaded>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <Navbar />
+            {children}{" "}
+          </ClerkLoaded>
         </body>
       </html>
       <script src="https://js.clerk.dev/captcha.js" async defer></script>
