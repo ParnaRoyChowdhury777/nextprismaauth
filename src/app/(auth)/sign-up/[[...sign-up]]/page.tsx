@@ -56,7 +56,8 @@ function SignUp() {
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error(JSON.stringify(error, null, 2));
+      //console.log(error.message);
+      //console.error(JSON.stringify(error, null, 2));
 
       switch (error.errors[0]?.code) {
         case "form_identifier_exists":
@@ -69,7 +70,7 @@ function SignUp() {
           break;
         case "form_param_format_invalid":
           toast.error(
-            "invalid email address. Please enter a valid email address."
+            "Invalid email address. Please enter a valid email address."
           );
           break;
         case "form_password_length_too_short":
@@ -157,7 +158,7 @@ function SignUp() {
           size="lg"
           type="submit"
           disabled={isVerified}
-          className="w-full"
+          className="w-full bg-blue-500 hover:bg-blue-600"
         >
           {isVerified ? (
             <LoaderIcon className="animate-spin w-5 h-5" />
@@ -188,7 +189,7 @@ function SignUp() {
       >
         <div className="space-y-2">
           <Label htmlFor="name">Full Name</Label>
-          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-800 bg-white">
+          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-600 bg-white">
             <User className="w-5 h-5 text-muted-foreground" />
             <input
               id="name"
@@ -204,7 +205,7 @@ function SignUp() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="email">Email Address</Label>
-          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-800 bg-white">
+          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-600 bg-white">
             <Mail className="w-5 h-5 text-muted-foreground" />
             <input
               id="email"
@@ -220,7 +221,7 @@ function SignUp() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-800 bg-white">
+          <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-600 bg-white">
             <Lock className="w-5 h-5 text-muted-foreground" />
             <input
               id="password"
@@ -250,7 +251,7 @@ function SignUp() {
         <div className="flex">
           <p className="text-sm text-muted-foreground text-center w-full">
             Already a member?{" "}
-            <Link href="sign-in" className="text-foreground hover:underline">
+            <Link href="sign-in" className="text-blue-500 hover:underline">
               Sign in
             </Link>
           </p>
