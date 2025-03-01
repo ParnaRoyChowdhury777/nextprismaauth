@@ -20,7 +20,7 @@ function Navbar() {
               {isSignedIn ? (
                 <div className="flex items-center gap-x-4">
                   <Button size="sm" variant="ghost" asChild>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href="/">Home</Link>
                   </Button>
                   <Button size="sm" onClick={() => signOut()}>
                     Sign Out

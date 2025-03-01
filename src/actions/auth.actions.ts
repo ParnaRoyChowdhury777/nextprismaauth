@@ -4,13 +4,21 @@ import { prisma } from "@/lib/db";
 import { User } from "@clerk/nextjs/server";
 
 export async function createUser(user: User) {
-    const dbUser = await prisma.user.create({
-        data: {
+
+    let dbUser = await prisma.user.findUnique({
+        where: {
             clerkId: user.id,
-            email: user.primaryEmailAddress!.emailAddress,
-            firstName: user.firstName,
-            lastName: user.lastName,
         },
     });
+    if (!dbUser) {
+        dbUser = await prisma.user.create({
+            data: {
+                clerkId: user.id,
+                email: user.primaryEmailAddress!.emailAddress,
+                firstName: user.firstName,
+                lastName: user.lastName,
+            },
+        });
+    }
     return dbUser;
 }

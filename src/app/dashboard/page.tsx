@@ -7,7 +7,7 @@ async function Dashboard() {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-up");
+    redirect("/sign-in");
   }
 
   const dbUser = await createUser(user);
