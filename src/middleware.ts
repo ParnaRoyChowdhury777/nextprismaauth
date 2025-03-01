@@ -4,11 +4,12 @@ import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher(["/", "/sign-in", "/sign-up"]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
     const url = req.nextUrl.pathname;
+    const { userId } = await auth();
 
     // If the user is not signed in and tries to access a protected route
-    if (!isPublicRoute(req) && url.startsWith("/dashboard")) {
+    if (!userId && !isPublicRoute(req) && url.startsWith("/dashboard")) {
         return NextResponse.rewrite(new URL('/sign-in', req.url));
     }
 });
