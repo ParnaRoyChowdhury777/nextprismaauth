@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 
@@ -9,14 +9,20 @@ async function AuthCallback() {
     return redirect("/sign-in");
   }
 
-  const dbUser = await db.user.findUnique({
-    where: {
-      id: user.id,
-    },
-  });
+  const dbUser = null;
+
+  // try {
+  //   dbUser = await prisma.user.findUnique({
+  //     where: {
+  //       id: user.id,
+  //     },
+  //   });
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
   if (!dbUser) {
-    await db.user.create({
+    await prisma.user.create({
       data: {
         id: user.id,
         clerkId: user.id,

@@ -50,7 +50,7 @@ export default function RootLayout({
               pauseOnHover
             />
             <Navbar />
-            {children}{" "}
+            {children}
           </ClerkLoaded>
         </body>
       </html>

@@ -118,3 +118,14 @@ body {
   border-radius: 4px;
   background-image: radial-gradient(75% 75% at center top, hsla(0, 0%, 100%, 0.2), transparent);
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
