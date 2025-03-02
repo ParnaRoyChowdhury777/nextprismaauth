@@ -1,9 +1,17 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { createUser } from "@/actions/auth.actions";
 
 export default async function Home() {
   const user = await currentUser();
+
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  const dbUser = await createUser(user);
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-xl mx-auto hc h-full">
@@ -12,12 +20,12 @@ export default async function Home() {
       </h1>
       <p className="text-muted-foreground text-balance text-center mt-4">
         {user
-          ? `Great to see you again, ${user.emailAddresses?.[0].emailAddress}!`
+          ? `Great to see you again, ${dbUser.email}!`
           : "Please sign in to continue."}
       </p>
       {user ? (
         <Button asChild size="sm" className="mt-6">
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href={`/dashboard/${user.id}`}>Dashboard</Link>
         </Button>
       ) : (
         <Button asChild size="sm" className="mt-6">
