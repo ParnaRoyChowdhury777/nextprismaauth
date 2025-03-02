@@ -25,7 +25,7 @@ export default async function Home() {
       </p>
       {user ? (
         <Button asChild size="sm" className="mt-6">
-          <Link href={`/dashboard/${user.id}`}>Dashboard</Link>
+          <Link href={`/dashboard/${dbUser.id}`}>Dashboard</Link>
         </Button>
       ) : (
         <Button asChild size="sm" className="mt-6">
