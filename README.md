@@ -35,21 +35,18 @@ This is a complete starter template for building authentication-powered applicat
 5. Create a .env file in the root directory which contains the following:
 
    ```bash
-    DATABASE_URL="mongodb+srv://roychowdhuryparna7719:fTz5ymv3xBojrFpP@cluster0.c6x4v.mongodb.net/testDB"
+      DATABASE_URL="mongodb+srv://(...)mongodb.net/testDB"
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+      CLERK_SECRET_KEY=
 
 
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your CLERK_PUBLISHABLE_KEY>
-CLERK_SECRET_KEY=<your CLERK_SECRET_KEY>
+      NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+      NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
 
-
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-
-NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL="/dashboard"
-NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL="/dashboard"
-NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL="/dashboard"
-NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL="/dashboard"
-
+      NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL="/dashboard"
+      NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL="/dashboard"
+      NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL="/dashboard"
+      NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL="/dashboard"
    ```
 6. Start the development server `bun run dev`
 7. Open http://localhost:3000 in your browser
