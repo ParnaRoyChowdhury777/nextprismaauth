@@ -10,7 +10,15 @@ export default clerkMiddleware(async (auth, req) => {
 
     // If the user is not signed in and tries to access a protected route
     if (!userId && !isPublicRoute(req) && url.startsWith("/dashboard")) {
-        return NextResponse.rewrite(new URL('/sign-in', req.url));
+        return NextResponse.redirect(new URL('/sign-in', req.url));
+    }
+
+    if (url.startsWith("/dashboard/")) {
+        const pathUserId = url.split("/")[2]; // Extract user ID from path
+
+        if (pathUserId !== userId) {
+            return NextResponse.redirect(new URL("/not-found", req.url)); // Redirect invalid users
+        }
     }
 });
 
