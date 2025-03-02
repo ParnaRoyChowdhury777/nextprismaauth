@@ -5,6 +5,7 @@ import * as SignIn from "@clerk/elements/sign-in";
 import { Button } from "@/components/ui/button";
 import { Mail, Loader, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
@@ -77,6 +78,16 @@ export default function SignInPage() {
               Sign up
             </Clerk.Link>
           </p>
+        </SignIn.Step>
+
+        <SignIn.Step name="sso-callback">
+          <SignIn.Captcha />
+          <div>
+            Sorry, this email is not registered. Sign Up with this email first.
+          </div>
+          <Link href="/sign-up">
+            <Button>Sign Up</Button>
+          </Link>
         </SignIn.Step>
 
         <SignIn.Step
