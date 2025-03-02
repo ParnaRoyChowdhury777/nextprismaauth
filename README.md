@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Starter Authentication Kit with Next.js, Tailwind CSS, Clerk and MongoDB using Prisma ORM
 
-## Getting Started
+This is a complete starter template for building authentication-powered applications using **Next.js**, **Tailwind CSS**, **Clerk** and **MongoDB** with **Prisma ORM** for database management. It comes pre-configured with user authentication, database integration, and a customizable UI to help you get started quickly.
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js** for fast and modern React-based web applications.
+- **Tailwind CSS** for easy and customizable styling.
+- **Clerk** for user authentication (sign-in, sign-up, and user management).
+- **MongoDB** as the database.
+- **Prisma ORM** for schema-based object modeling.
+- Pre-configured routes and middleware for authentication.
+- Custom sign-in and sign-up pages.
+- Scalable project structure.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Prerequisites
 
-## Learn More
+- **Node.js** (v18+ recommended)
+- **Bun** (package manager)
+- **MongoDB** (running instance or cloud database, e.g., MongoDB Atlas)
+- **Clerk Account** ([Sign up for Clerk](https://clerk.dev))
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to use the template
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository `git clone https://github.com/ParnaRoyChowdhury777/next-tailwind-clerk-mongoose-mongodb.git` or download the zip file.
+2. Open the project in your favorite code editor.
+3. Navigate to the project directory cd next-tailwind-clerk-mongoose-mongodb.
+4. Install the dependencies `bun install`.
+5. Create a .env file in the root directory which contains the following:
 
-## Deploy on Vercel
+   ```bash
+    DATABASE_URL="mongodb+srv://roychowdhuryparna7719:fTz5ymv3xBojrFpP@cluster0.c6x4v.mongodb.net/testDB"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your CLERK_PUBLISHABLE_KEY>
+CLERK_SECRET_KEY=<your CLERK_SECRET_KEY>
+
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+
+NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL="/dashboard"
+NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL="/dashboard"
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL="/dashboard"
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL="/dashboard"
+
+   ```
+6. Start the development server `bun run dev`
+7. Open http://localhost:3000 in your browser
+
+<br>
