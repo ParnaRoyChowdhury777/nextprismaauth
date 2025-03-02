@@ -4,6 +4,7 @@ import * as Clerk from "@clerk/elements/common";
 import * as SignIn from "@clerk/elements/sign-in";
 import { Button } from "@/components/ui/button";
 import { Mail, Loader, Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function SignInPage() {
   return (
@@ -127,6 +128,72 @@ export default function SignInPage() {
               </div>
             </SignIn.Action>
           </SignIn.Strategy>
+          <SignIn.Strategy name="reset_password_email_code">
+            <h1 className="text-2xl text-center font-bold">Check your email</h1>
+            <p
+              className="text-muted-foreground
+            text-center"
+            >
+              We sent a code to <SignIn.SafeIdentifier />.
+            </p>
+
+            <Clerk.Field name="code" className="flex flex-col space-y-4">
+              <Clerk.Label className="text-center">
+                Enter the email code
+              </Clerk.Label>
+              <Clerk.Input
+                type="otp"
+                className="flex justify-center has-[:disabled]:opacity-50"
+                autoSubmit
+                render={({ value, status }) => {
+                  return (
+                    <div
+                      data-status={status}
+                      className={cn(
+                        "relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
+                        {
+                          "z-10 ring-1 ring-blue-500":
+                            status === "cursor" || status === "selected",
+                        }
+                      )}
+                    >
+                      {value}
+                      {status === "cursor" && (
+                        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                          <div className="animate-caret-blink h-4 w-px bg-foreground duration-1000" />
+                        </div>
+                      )}
+                    </div>
+                  );
+                }}
+              />
+              <Clerk.FieldError className="block text-red-500 text-sm text-center" />
+            </Clerk.Field>
+            <SignIn.Action
+              asChild
+              resend
+              className="text-muted-foreground"
+              fallback={({ resendableAfter }) => (
+                <div className="text-center">
+                  <Button variant="link" size="sm" disabled>
+                    Didn&apos;t receive a code? Resend (
+                    <span className="tabular-nums">{resendableAfter}</span>)
+                  </Button>
+                </div>
+              )}
+            >
+              <div className="text-center">
+                <Button
+                  type="button"
+                  variant="link"
+                  size="sm"
+                  className="text-blue-500"
+                >
+                  Didn&apos;t receive a code? Resend
+                </Button>
+              </div>
+            </SignIn.Action>
+          </SignIn.Strategy>
         </SignIn.Step>
 
         <SignIn.Step
@@ -137,13 +204,13 @@ export default function SignInPage() {
             Forgot your password?
           </h1>
 
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col space-y-4">
             <SignIn.SupportedStrategy name="reset_password_email_code" asChild>
-              <Button type="submit">Reset password</Button>
+              <Button>Reset password</Button>
             </SignIn.SupportedStrategy>
 
             <SignIn.Action navigate="previous" asChild>
-              <Button>Go back</Button>
+              <Button variant="link">← Go back</Button>
             </SignIn.Action>
           </div>
         </SignIn.Step>
@@ -152,21 +219,56 @@ export default function SignInPage() {
           name="reset-password"
           className="w-full max-w-sm space-y-4 border p-7 rounded-lg shadow-lg"
         >
-          <h1>Reset your password</h1>
+          <h1 className="text-2xl text-center font-bold">
+            Reset your password
+          </h1>
 
-          <Clerk.Field name="password">
-            <Clerk.Label>New password</Clerk.Label>
-            <Clerk.Input />
-            <Clerk.FieldError />
+          <Clerk.Field name="password" className="flex flex-col space-y-2">
+            <Clerk.Label className="text-sm">New password</Clerk.Label>
+            <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-600 bg-white">
+              <Lock className="w-5 h-5 text-muted-foreground" />
+              <Clerk.Input
+                type="password"
+                validatePassword
+                placeholder="Enter your password"
+                className="w-full ml-2 bg-transparent outline-none text-sm placeholder-gray-500 p-0.5"
+                required
+              />
+            </div>
+            <Clerk.FieldError className="block text-red-500 text-sm" />
           </Clerk.Field>
 
-          <Clerk.Field name="confirmPassword">
-            <Clerk.Label>Confirm password</Clerk.Label>
-            <Clerk.Input />
-            <Clerk.FieldError />
+          <Clerk.Field
+            name="confirmPassword"
+            className="flex flex-col space-y-2"
+          >
+            <Clerk.Label className="text-sm">Confirm password</Clerk.Label>
+            <div className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus-within:border-blue-600 bg-white">
+              <Lock className="w-5 h-5 text-muted-foreground" />
+              <Clerk.Input
+                type="password"
+                validatePassword
+                placeholder="Enter your password"
+                className="w-full ml-2 bg-transparent outline-none text-sm placeholder-gray-500 p-0.5"
+                required
+              />
+            </div>
+            <Clerk.FieldError className="block text-red-500 text-sm" />
           </Clerk.Field>
 
-          <SignIn.Action submit>Reset password</SignIn.Action>
+          <SignIn.Action submit asChild>
+            <Button className="w-full">
+              <Clerk.Loading>
+                {(isLoading) =>
+                  isLoading ? (
+                    <Loader className="size-4 animate-spin" />
+                  ) : (
+                    "Reset password"
+                  )
+                }
+              </Clerk.Loading>
+            </Button>
+          </SignIn.Action>
         </SignIn.Step>
       </SignIn.Root>
     </div>
