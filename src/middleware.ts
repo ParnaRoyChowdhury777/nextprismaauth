@@ -13,13 +13,13 @@ export default clerkMiddleware(async (auth, req) => {
         return NextResponse.redirect(new URL('/sign-in', req.url));
     }
 
-    if (url.startsWith("/dashboard/")) {
+    /*if (url.startsWith("/dashboard/")) {
         const pathUserId = url.split("/")[2]; // Extract user ID from path
 
         if (pathUserId !== userId) {
             return NextResponse.redirect(new URL("/not-found", req.url)); // Redirect invalid users
         }
-    }
+    }*/
 });
 
 export const config = {
